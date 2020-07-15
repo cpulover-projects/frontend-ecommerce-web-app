@@ -15,7 +15,20 @@
    - Inject HttpClient by constructor from ```@angular/common/http``` 
 9. Import HttpClientModule from ```@angular/common/http``` and new Service (allow inject to other parts of the app) to main app module 
 [[app.module.ts]()]
+10. Update Component to subcribe data from the Service 
+[[product-list.component.ts]()]
+    - Inject the Service by constructor
+11. Update Template to display data 
+[[product-list.component.html]()]
 
 ## Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
+- ```ngOnInit()``` of Class is similar to @PostConstruct
+
+
+
+
+
+
+
 
