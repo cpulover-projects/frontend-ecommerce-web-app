@@ -3,3 +3,4 @@
 2. Integrate Bootstrap
 3. Update main app template 
 [[app.component.html]()]
+4. Test: run project by CLI
