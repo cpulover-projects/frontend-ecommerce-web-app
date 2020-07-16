@@ -21,10 +21,14 @@
 11. Update Template to display data 
 [[product-list.component.html]()]
 
+#### ...
+- Update Template for product list Component 
+[[product-list-table.component.html]()]
+
 ## Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
 - ```ngOnInit()``` of Class is similar to @PostConstruct
-
+- ```src/assets``` used to store resources: images, JS, CSS, etc.
 
 
 
