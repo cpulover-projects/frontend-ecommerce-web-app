@@ -36,7 +36,8 @@
 6. Add CSS styles globally in 
 [src/style.css]()
 7. Restart app (if running) to make change with new configuration.
-
+8. Integrate sample templates to the app templates  
+[[app.component.html]()] [[product-list-grid.component.html()]]
 
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
