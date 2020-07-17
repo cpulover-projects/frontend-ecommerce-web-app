@@ -36,8 +36,23 @@
 6. Add CSS styles globally in 
 [src/style.css]()
 7. Restart app (if running) to make change with new configuration.
-8. Integrate sample templates to the app templates  
-[[app.component.html]()] [[product-list-grid.component.html()]]
+8. Integrate sample templates to the app templates 
+[[app.component.html]()] [[product-list-grid.component.html]()]
+
+### Routing
+1. Define routes in the app module 
+[[app.module.ts]()]
+   - Use ** to for generic matching
+   - First match wins: start from most specific to generic
+   - Configure Route based on the defined routes in ```imports```: ```RouteModule.forRoot(<routes_name>)```
+2. Define Router Outlet and setup Route Link in main template 
+[[main.component.html]()]
+3. Enhance Components in the routes to read param path (if there is) 
+[[product-list.component.ts]()]
+   - Add param as new property of the class
+   - Inject ```ActivatedRoute``` (which loaded the Component) by the constructor for accessing route params
+- Update Service method to get the params and call the appropriate API 
+[[product.service.ts]()]
 
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
@@ -46,6 +61,8 @@
 - ```node_modules``` directory and ```package.json``` contain all the dependencies.
 - ```angular.json``` is the main configuration file of the project.
 - ```src/style.css``` is the global CSS style
+- Use prefix ```+``` to convert string to number
+
 
 
 

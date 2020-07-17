@@ -11,13 +11,17 @@ import {map} from 'rxjs/operators';
 export class ProductService {
   private baseUrl = "http://localhost:8080/api/products";
 
+
   //inject HttpClient to make HTTP requests
   constructor(private httpClient: HttpClient) { }
 
   //map the JSON data from REST API to Product array
-  getProductList(): Observable<Product[]>{
+  getProductList(categoryId:number): Observable<Product[]>{
+    //define endpoint for searching (match to the REST API)
+    const searchUrl=`${this.baseUrl}/search/findByCategoryId?id=${categoryId}`; 
+
     //HttpClient makes GET method to receive GetResonse from the defined URL (API)
-    return this.httpClient.get<GetResponse>(this.baseUrl).
+    return this.httpClient.get<GetResponse>(searchUrl).
     //then transform (map) 
     pipe(map(response=>response._embedded.products));
   }  
