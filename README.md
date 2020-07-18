@@ -8,21 +8,21 @@
 4. Test: run project by CLI
 
 ### Main Process
-5. Generate new Component by CLI 
-[[product-list]()]
-6. Add new component selector to main template
-7. Generate new Class by CLI 
+1. Generate new Class by CLI 
 [[common]()]
    - Declare attributes to match with JSON received from REST API 
-8. Generate new Service by CLI 
+2. Generate new Component by CLI (normally is a set of class entities) 
+[[product-list]()]
+3. Add new component selector to main template
+4. Generate new Service by CLI: provide functions calling API then map data to the Component
 [[services]()]
-   - Inject HttpClient by constructor from ```@angular/common/http``` 
-9. Import HttpClientModule from ```@angular/common/http``` and new Service (allow inject to other parts of the app) to main app module 
+   - Inject HttpClient by constructor from ```@angular/common/http```: support HTTP methods
+5. Import HttpClientModule from ```@angular/common/http``` and new Service (allow inject to other parts of the app) to main app module 
 [[app.module.ts]()]
-10. Update Component to subcribe data from the Service 
+6. Update Component to subcribe data from the Service 
 [[product-list.component.ts]()]
     - Inject the Service by constructor
-11. Update Template to display data 
+7. Update Template to display data 
 [[product-list-table.component.html]()]
 
 # 2.0 Release
@@ -62,6 +62,7 @@
 - ```angular.json``` is the main configuration file of the project.
 - ```src/style.css``` is the global CSS style
 - Use prefix ```+``` to convert string to number
+- To view log, open Develop Tools/Inspect on the broswer (F12 for Chrome)
 
 
 

@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit {
   products: Product[];
 
   currentCategoryId: number;
+  currentCategoryName: string;
 
   //inject the Service
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
@@ -21,6 +22,7 @@ export class ProductListComponent implements OnInit {
   //similar to @PostConstruct
   ngOnInit(): void {
     //???
+    //ensure listProducts() is invoked whenever the route path changes
     this.route.paramMap.subscribe(() => {
       this.listProducts();
     });
@@ -30,11 +32,14 @@ export class ProductListComponent implements OnInit {
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 
     if (hasCategoryId) {
-      //get "id" param string and convert it to number using "+" symbol
+      //get "id" param string in the current route path and convert it to number using "+" symbol
       this.currentCategoryId = +this.route.snapshot.paramMap.get("id");
+      //get "name" param to display in the template
+      this.currentCategoryName=this.route.snapshot.paramMap.get("name");
     } else {
       //if "id" not available, default category is 1
       this.currentCategoryId=1;
+      this.currentCategoryName = 'Books';
     }
 
     //method is invoked when subscribe
