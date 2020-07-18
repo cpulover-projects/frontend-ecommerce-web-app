@@ -1,0 +1,10 @@
+<div class="form-header">
+    <!--invoke doSearch() of Search Component on "Enter" event-->  
+    <input #myInput type="text" placeholder="Search for products..." class="au-input au-input-xl" 
+    (keyup.enter)="doSearch(myInput.value)"/>   
+
+    <!--and on "Click button" event-->
+    <button (click)="doSearch(myInput.value)" class="au-btn-submit">
+        Search
+    </button>
+</div>

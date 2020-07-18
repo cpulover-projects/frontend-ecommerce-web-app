@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
 
   currentCategoryId: number;
   currentCategoryName: string;
+  searchMode: boolean;
 
   //inject the Service
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
@@ -27,28 +28,51 @@ export class ProductListComponent implements OnInit {
       this.listProducts();
     });
   }
+
   listProducts() {
-    //check if "id" param is available
-    const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+    // check if in the route path there is searchName parameter = searching
+   this.searchMode=this.route.snapshot.paramMap.has('searchName');
+   
+   if(this.searchMode){
+      this.handleSearchProducts();
+   } else {
+     //if not searching, list all the products
+     this.handleListProducts();
+   }
+  }
 
-    if (hasCategoryId) {
-      //get "id" param string in the current route path and convert it to number using "+" symbol
-      this.currentCategoryId = +this.route.snapshot.paramMap.get("id");
-      //get "name" param to display in the template
-      this.currentCategoryName=this.route.snapshot.paramMap.get("name");
-    } else {
-      //if "id" not available, default category is 1
-      this.currentCategoryId=1;
-      this.currentCategoryName = 'Books';
-    }
+  handleSearchProducts() {
+    const keyword = this.route.snapshot.paramMap.get('searchName');
 
-    //method is invoked when subscribe
-    //get the products for the given category id
-    this.productService.getProductList(this.currentCategoryId).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+        this.productService.searchProducts(keyword).subscribe(
+          data => {
+            this.products = data;
+          }
+        )
+  }
+
+  handleListProducts(){
+     //check if "id" param is available
+     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+
+     if (hasCategoryId) {
+       //get "id" param string in the current route path and convert it to number using "+" symbol
+       this.currentCategoryId = +this.route.snapshot.paramMap.get("id");
+       //get "name" param to display in the template
+       this.currentCategoryName=this.route.snapshot.paramMap.get("name");
+     } else {
+       //if "id" not available, default category is 1
+       this.currentCategoryId=1;
+       this.currentCategoryName = 'Books';
+     }
+ 
+     //method is invoked when subscribe
+     //get the products for the given category id
+     this.productService.getProductList(this.currentCategoryId).subscribe(
+       data => {
+         this.products = data;
+       }
+     )
   }
 
 }

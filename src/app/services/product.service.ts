@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
+  
   private baseUrl = "http://localhost:8080/api/products";
   private categoryUrl = "http://localhost:8080/api/product-category";
 
@@ -30,6 +31,13 @@ export class ProductService {
     return this.httpClient.get<GetResponseCategory>(this.categoryUrl)
     .pipe(map(response=>response._embedded.productCategory));
   }
+
+  searchProducts(keyword: string): Observable<Product[]> {
+    const searchUrl=`${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
+   return this.httpClient.get<GetResponseProduct>(searchUrl)
+   .pipe(map(response=>response._embedded.products));
+  }
+
 }
 
 //???

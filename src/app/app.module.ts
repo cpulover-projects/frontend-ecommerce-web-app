@@ -7,10 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { Route, Routes, RouterModule } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
+import { SearchComponent } from './components/search/search.component';
 
 //define routes
 const routes: Routes = [
   { path: 'category/:id/:name', component: ProductListComponent },
+  //Add new route for searching
+  { path: 'search/:searchName', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -21,7 +24,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductCategoryMenuComponent
+    ProductCategoryMenuComponent,
+    SearchComponent
   ],
   imports: [
     //configure Route

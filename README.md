@@ -54,6 +54,20 @@
 - Update Service method to get the params and call the appropriate API 
 [[product.service.ts]()]
 
+### Search Function
+1. Create new component for search 
+[[search]]
+2. Add new route path for searching 
+[[app.module.ts]()]
+3. Update Search Component 
+[[search.component.ts]()]
+   - Inject the router (from ```@angular/router```)
+   - Create a navigating method to navigate router to the search path
+4. Update the Component and Service handling search method using API
+[[list-product.component.ts]()] [[product.service.ts]()]
+5. Update Search Template to call the navigating method of Search Component based on the events 
+[[search.component.html]()]
+
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
 - ```ngOnInit()``` of Class is similar to @PostConstruct.
