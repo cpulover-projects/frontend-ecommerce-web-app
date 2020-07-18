@@ -77,7 +77,7 @@
 - ```src/style.css``` is the global CSS style
 - Use prefix ```+``` to convert string to number
 - To view log, open Develop Tools/Inspect on the broswer (F12 for Chrome)
-
+- Use Safe Navigator operator ```?``` to guard against null or undefined values in property paths
 
 
 
