@@ -9,7 +9,6 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-  
   private baseUrl = "http://localhost:8080/api/products";
   private categoryUrl = "http://localhost:8080/api/product-category";
 
@@ -36,6 +35,12 @@ export class ProductService {
     const searchUrl=`${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
    return this.httpClient.get<GetResponseProduct>(searchUrl)
    .pipe(map(response=>response._embedded.products));
+  }
+
+  getProduct(productId: number):Observable<Product> {
+   const theUrl=`${this.baseUrl}/${productId}`;
+   //no need to unwrap the json since a single product
+   return this.httpClient.get<Product>(theUrl);
   }
 
 }

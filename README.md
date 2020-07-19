@@ -68,6 +68,23 @@
 5. Update Search Template to call the navigating method of Search Component based on the events 
 [[search.component.html]()]
 
+### Master-Detail Product View
+1. Generate new component for product details 
+[[product-detail]()]
+2. Add new route for product details 
+[[app.module.ts]()]
+3. Add route link to the template (where the link can be accessed) 
+[[product-list.grid.component.html]()]
+4. Update the product detail Component 
+[[product-detail.componenet.ts]()]
+   - New attribute: product
+   - Inject Active Route (to get the id in the route path and the Service (to get the product by id)
+5. Create method in the Service to handle getting the product by id, using API 
+[[product-service]()]
+6. Update the Template to display product details 
+[[product-detail.component.html]()]
+
+
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
 - ```ngOnInit()``` of Class is similar to @PostConstruct.
@@ -78,6 +95,13 @@
 - Use prefix ```+``` to convert string to number
 - To view log, open Develop Tools/Inspect on the broswer (F12 for Chrome)
 - Use Safe Navigator operator ```?``` to guard against null or undefined values in property paths
+- ActivatedRoute provides access to the url, params, data, queryParams, and fragment observables of the route associated with a component loaded in an outlet
+- Race condition: the Template attemps to access undefined property. Solution:
+  - Initialize fields when declaring 
+  [[product-detail.component.ts]()]
+  - Use Safe Navigator operator in the Template 
+  [[product-detail.component.html]()]
+  - Use ```ngIf``` in the Template to check if the property is assigned yet
 
 
 
