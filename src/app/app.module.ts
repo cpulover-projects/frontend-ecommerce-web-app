@@ -11,14 +11,17 @@ import { SearchComponent } from './components/search/search.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 //define routes
 const routes: Routes = [
+  //add new route to view cart details
+  { path: 'cart-details', component: CartDetailsComponent},
   { path: 'category/:id/:name', component: ProductListComponent },
   //add new route for searching
   { path: 'search/:searchName', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
-  //add new route for view product detail
+  //add new route to view product detail
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'products', component: ProductListComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -32,7 +35,8 @@ const routes: Routes = [
     ProductCategoryMenuComponent,
     SearchComponent,
     ProductDetailComponent,
-    CartStatusComponent
+    CartStatusComponent,
+    CartDetailsComponent
   ],
   imports: [ //import modules to expose their classes, interfaces... in the app module
     //configure Route

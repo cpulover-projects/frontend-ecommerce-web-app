@@ -72,7 +72,7 @@
 [[search.component.html]()]
 
 ### Master-Detail Product View
-1. Generate new component for product details 
+1. Generate new Component for product details 
 [[product-detail]()]
 2. Add new route for product details 
 [[app.module.ts]()]
@@ -115,25 +115,35 @@
 [[app.component.html]()]
 3. Update the Template 
 [[cart-status.component.html]()]
-
-6. Create model class 
+4. Create model class 
 [[common/cart-item]()]
-7. Create new Service for manage the cart 
+5. Create new Service for manage the cart 
 [[services/cart-service]()]
-
-4. Add click handler for "Add to cart" 
+6. Add click handler for "Add to cart" 
 [[product-list-grid.component.html]()] [[product-details.component.html]()]
    - Event-binding for ```<button>```: ```(click)```
-8. Update the Component making use of the Cart Service 
+7. Update the Component making use of the Cart Service 
 [[product-list.component.ts]()] [[product-details.component.ts]()]
    - Inject the Service by the constructor
    - Call the method of the Service the handle the click handler in the Template
-9. Update the Component related to the Service 
+8. Update the Component related to the Service 
 [[cart-status.component.ts]]
-10. Update the Template 
+9. Update the Template 
 [[cart-status.component.html]()]
 
-
+### Cart Detail View
+1. Generate new Component for cart details 
+[[components/cart-details]()]
+2. Add new route for cart details in  
+[app.module.ts]()
+3. Add route link to the template (where the link can be accessed) 
+[[cart-status.component.html]()]
+4. Update the cart details Component 
+[[cart-details.componenet.ts]()]
+   - New attributes (which needed to display on the template)
+   - Inject cart Service (to get the cart)
+6. Update the Template to display cart details 
+[[cart-details.component.html]()]
 
 
 # Notes
