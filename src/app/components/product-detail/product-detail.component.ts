@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Route, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product.service';
+import { CartService } from 'src/app/services/cart.service';
+import { CartItem } from 'src/app/common/cart-item';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,8 +12,8 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product: Product=new Product(); //Initialize field to avoid race condition
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  product: Product = new Product(); //Initialize field to avoid race condition
+  constructor(private productService: ProductService, private route: ActivatedRoute, private cartService: CartService) { }
 
   ngOnInit(): void {
     //subscribe to extract the router parameters
@@ -31,6 +33,11 @@ export class ProductDetailComponent implements OnInit {
         this.product = data;
       }
     );
+  }
+
+  addToCart() {
+    const theCartItem: CartItem = new CartItem(this.product);
+    this.cartService.addToCart(theCartItem);
   }
 
 

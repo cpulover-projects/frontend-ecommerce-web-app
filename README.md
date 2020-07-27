@@ -12,7 +12,7 @@
 [[common/product]()]
    - Declare attributes to match with JSON received from REST API 
 2. Generate new Component by CLI (normally is a set of class entities) 
-[[product-list]()]
+[[components/product-list]()]
 3. Add new component selector to main template
 4. Generate new Service by CLI (provide functions calling API then map data to the Component)
 [[services/product-service]()]
@@ -29,7 +29,7 @@
 ### Template Integration
 1. Get sample templates including HTML and CSS files (work from front-end)
 2. Install Bootstrap CSS style locally by CLI: ```npm install bootstrap```
-3. Install Fontawesome (for ???): ```npm install @fortawesome/fontawesome-free``` 
+3. Install Fontawesome (for icons): ```npm install @fortawesome/fontawesome-free``` 
 4. Verify installed entries in ```node_modules``` directory or ```package.json```
 5. Inject CSS style entries globally by configurating ```styles``` in 
 [angular.json]() 
@@ -108,6 +108,34 @@
    - Dropdown list ```<select>```
      - Event binding: ```(change)```
 
+### Cart Implementation
+1. Generate new Component 
+[[components/cart-status]]
+2. Add new component selector to the parent container template 
+[[app.component.html]()]
+3. Update the Template 
+[[cart-status.component.html]()]
+
+6. Create model class 
+[[common/cart-item]()]
+7. Create new Service for manage the cart 
+[[services/cart-service]()]
+
+4. Add click handler for "Add to cart" 
+[[product-list-grid.component.html]()] [[product-details.component.html]()]
+   - Event-binding for ```<button>```: ```(click)```
+8. Update the Component making use of the Cart Service 
+[[product-list.component.ts]()] [[product-details.component.ts]()]
+   - Inject the Service by the constructor
+   - Call the method of the Service the handle the click handler in the Template
+9. Update the Component related to the Service 
+[[cart-status.component.ts]]
+10. Update the Template 
+[[cart-status.component.html]()]
+
+
+
+
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
 - ```ngOnInit()``` of Class is similar to @PostConstruct.
@@ -121,6 +149,11 @@
   - Use Safe Navigator operator in the Template 
   [[product-detail.component.html]()]
   - Use ```ngIf``` in the Template to check if the property is assigned yet
+- Use ```Subject.next()``` to send events to the subscribers 
+[[cart-service.service.ts]()]
+- Use ```Array.find()``` to return the first element passing a given test, otherwise return undefined
+[[cart-service.service.ts]()]
+- [TypeScript] Use ```===``` for equality test
 
 
 
