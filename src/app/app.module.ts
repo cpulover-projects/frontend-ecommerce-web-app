@@ -9,6 +9,7 @@ import { Route, Routes, RouterModule } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //define routes
 const routes: Routes = [
@@ -31,11 +32,12 @@ const routes: Routes = [
     SearchComponent,
     ProductDetailComponent
   ],
-  imports: [
+  imports: [ //import modules to expose their classes, interfaces... in the app module
     //configure Route
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

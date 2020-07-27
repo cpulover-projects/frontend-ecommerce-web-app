@@ -3,25 +3,25 @@
 ### Setup Project
 1. Create new project by Angular CLI
 2. Integrate Bootstrap
-3. Update main app template 
-[[app.component.html]()]
+3. Update 
+[app.component.html]()
 4. Test: run project by CLI
 
 ### Main Process
 1. Generate new Class by CLI 
-[[common]()]
+[[common/product]()]
    - Declare attributes to match with JSON received from REST API 
 2. Generate new Component by CLI (normally is a set of class entities) 
 [[product-list]()]
 3. Add new component selector to main template
-4. Generate new Service by CLI: provide functions calling API then map data to the Component
-[[services]()]
-   - Inject HttpClient by constructor from ```@angular/common/http```: support HTTP methods
-5. Import HttpClientModule from ```@angular/common/http``` and new Service (allow inject to other parts of the app) to main app module 
-[[app.module.ts]()]
+4. Generate new Service by CLI (provide functions calling API then map data to the Component)
+[[services/product-service]()]
+   - Inject HttpClient by constructor from ```@angular/common/http``` (supports HTTP methods)
+5. Import HttpClientModule from ```@angular/common/http``` and new Service (allow inject to other parts of the app) into 
+[app.module.ts]()
 6. Update Component to subcribe data from the Service 
 [[product-list.component.ts]()]
-    - Inject the Service by constructor
+    - Inject the Service by constructor (to invoke methods of the Service)
 7. Update Template to display data 
 [[product-list-table.component.html]()]
 
@@ -29,7 +29,7 @@
 ### Template Integration
 1. Get sample templates including HTML and CSS files (work from front-end)
 2. Install Bootstrap CSS style locally by CLI: ```npm install bootstrap```
-3. Install Fontawesome for icons: ```npm install @fortawesome/fontawesome-free``` 
+3. Install Fontawesome (for ???): ```npm install @fortawesome/fontawesome-free``` 
 4. Verify installed entries in ```node_modules``` directory or ```package.json```
 5. Inject CSS style entries globally by configurating ```styles``` in 
 [angular.json]() 
@@ -45,13 +45,16 @@
    - Use ** to for generic matching
    - First match wins: start from most specific to generic
    - Configure Route based on the defined routes in ```imports```: ```RouteModule.forRoot(<routes_name>)```
-2. Define Router Outlet and setup Route Link in main template 
-[[main.component.html]()]
-3. Enhance Components in the routes to read param path (if there is) 
+2. Define Router Outlet (location of dynamic content) in 
+[app.component.html]()
+3. Setup Route Link in the Template (where links to different routes, e.g. menu) 
+[[product-categor-menu.html]()] 
+4. Enhance Components in the routes to read param path (if there is) 
 [[product-list.component.ts]()]
    - Add param as new property of the class
-   - Inject ```ActivatedRoute``` (which loaded the Component) by the constructor for accessing route params
-- Update Service method to get the params and call the appropriate API 
+   - Inject ```ActivatedRoute``` (which loaded the Component) by the constructor (for accessing route params)
+   - Create/Update methods to handle the route with params, which will delergate to Service methods
+5. Update Service methods to get the params and call the appropriate API based on the params
 [[product.service.ts]()]
 
 ### Search Function
@@ -84,14 +87,30 @@
 6. Update the Template to display product details 
 [[product-detail.component.html]()]
 
+### Pagination
+1. Install ng-bootstrap by CLI
+   - ```ng add @angular/localize```: dependency for Angular 9+
+   - ```npm install @ng-bootstrap/ng-bootstrap```
+2. Import NgbModule from ng-bootstrap in 
+[app.module.ts]()
+3. Update the Service to get metadata regarding pagination provided by Spring Data REST API 
+[[product.service.ts]()]
+4. Update the Component to handle pagination 
+[[product-list.component.ts]()]
+5. Update the Template to use ng-bootstrap pagination component 
+[[product-list-grid.component.html]()] 
+   - Page list ```<ngb-pagination>``` 
+     - Event binding: ```(pageChange)```
+     - Use ```[()]``` for 2-way binding: change in Component leads to change in Template and vice versa
+     - Use ```[]``` for 1-way binding: change in Component leads to change in Template
+     - ```[maxSize]```: shows a max number of page
+     - Set ```[boundaryLinks]```: alow jumping to the beginning/end of page list
+   - Dropdown list ```<select>```
+     - Event binding: ```(change)```
 
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
 - ```ngOnInit()``` of Class is similar to @PostConstruct.
-- ```src/assets``` used to store resources: images, JS, CSS, etc.
-- ```node_modules``` directory and ```package.json``` contain all the dependencies.
-- ```angular.json``` is the main configuration file of the project.
-- ```src/style.css``` is the global CSS style
 - Use prefix ```+``` to convert string to number
 - To view log, open Develop Tools/Inspect on the broswer (F12 for Chrome)
 - Use Safe Navigator operator ```?``` to guard against null or undefined values in property paths
