@@ -145,6 +145,27 @@
 6. Update the Template to display cart details 
 [[cart-details.component.html]()]
 
+### Checkout Form
+1. Generate new Component 
+[[components/checkout]()]
+2. Add new route to checkout form 
+[[app.module.ts]()]
+3. Create button with router link to the new route 
+[[cart-details.component.html]()]
+4. Add support for reactive forms in 
+[app.module.ts]()
+5. Define forms in the Component 
+[[checkout.component.ts]()]
+   - Declare FormGroup property
+   - Inject Form Builder (to create form)
+   - Build groups of forms
+6. Layout the form in the Template 
+[[checkout.component.html]()]
+7. Add event handler for form submission with ```(ngSubmit)``` of ```<form>```  
+[[checkout.component.html]()]
+8. Define method for event handler in the Component 
+[[checkout.component.ts]()]
+
 
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
@@ -164,7 +185,7 @@
 - Use ```Array.find()/findIndex()``` to return the first element/id of element passing a given test, otherwise return undefined
 [[cart-service.service.ts]()]
 - [TypeScript] Use ```===``` for equality test
-
+- Use ```of``` operator to wrap object as Observable
 
 
 

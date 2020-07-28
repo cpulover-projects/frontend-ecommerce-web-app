@@ -12,9 +12,13 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //define routes
 const routes: Routes = [
+  //add new route for checkout form
+  { path: 'checkout', component: CheckoutComponent},
   //add new route to view cart details
   { path: 'cart-details', component: CartDetailsComponent},
   { path: 'category/:id/:name', component: ProductListComponent },
@@ -36,7 +40,8 @@ const routes: Routes = [
     SearchComponent,
     ProductDetailComponent,
     CartStatusComponent,
-    CartDetailsComponent
+    CartDetailsComponent,
+    CheckoutComponent
   ],
   imports: [ //import modules to expose their classes, interfaces... in the app module
     //configure Route
@@ -44,6 +49,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     NgbModule,
+    //Add support for reactive forms
+    ReactiveFormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
