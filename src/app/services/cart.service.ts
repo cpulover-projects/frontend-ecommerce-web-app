@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
+
   cartItems: CartItem[] = [];
   //use Subject type to publish event to all subscribers
   totalPrice: Subject<number> = new Subject<number>();
@@ -62,5 +63,24 @@ export class CartService {
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
 
+  }
+
+  decrementQuantity(item: CartItem) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      //update new values to other subscriber components
+      this.computeCartTotals();
+    } else {
+      this.removeItem(item);
+    }
+
+  }
+
+  removeItem(item: CartItem) {
+    const itemIdex = this.cartItems.findIndex(cartItem => cartItem.id === item.id);
+    if (itemIdex > -1) {
+      this.cartItems.splice(itemIdex, 1);
+      this.computeCartTotals();
+    }
   }
 }

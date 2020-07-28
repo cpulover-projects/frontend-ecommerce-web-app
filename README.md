@@ -161,7 +161,7 @@
   - Use ```ngIf``` in the Template to check if the property is assigned yet
 - Use ```Subject.next()``` to send events to the subscribers 
 [[cart-service.service.ts]()]
-- Use ```Array.find()``` to return the first element passing a given test, otherwise return undefined
+- Use ```Array.find()/findIndex()``` to return the first element/id of element passing a given test, otherwise return undefined
 [[cart-service.service.ts]()]
 - [TypeScript] Use ```===``` for equality test
 

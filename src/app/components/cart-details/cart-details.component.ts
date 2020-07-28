@@ -21,19 +21,31 @@ export class CartDetailsComponent implements OnInit {
 
   listCartItems() {
     this.cart = this.cartService.cartItems;
-    
+
     //subscribe to the cart total price
     this.cartService.totalPrice.subscribe(
-      data=>this.totalPrice=data
+      data => this.totalPrice = data
     )
 
     //subscribe to the cart total quantity
     this.cartService.totalQuantity.subscribe(
-      data=>this.totalQuantity=data
+      data => this.totalQuantity = data
     )
 
+    //???
     this.cartService.computeCartTotals();
+  }
 
+  incrementQuantity(item: CartItem) {
+    this.cartService.addToCart(item);
+  }
+
+  decrementQuantity(item: CartItem) {
+    this.cartService.decrementQuantity(item);
+  }
+
+  removeItem(item: CartItem){
+    this.cartService.removeItem(item);
   }
 
 }
