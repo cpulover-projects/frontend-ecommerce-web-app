@@ -139,18 +139,22 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2"><label>Expired month</label></div>
+                        <div class="col-md-2"><label>Expiration month</label></div>
                         <div class="col-md-9">
                             <select formControlName="expirationMonth">
-                                <option></option>
+                                <option *ngFor="let month of expirationMonths" >
+                                    {{month}}
+                                </option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2"><label>Expired year</label></div>
+                        <div class="col-md-2"><label>Expiration year</label></div>
                         <div class="col-md-9">
                             <select formControlName="expirationYear">
-                                <option></option>
+                                <option *ngFor="let year of expirationYears">
+                                    {{year}}
+                                </option>
                             </select>
                         </div>
                     </div>

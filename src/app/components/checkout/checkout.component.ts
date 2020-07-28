@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
+import { ExpirationService } from 'src/app/services/expiration.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,10 @@ export class CheckoutComponent implements OnInit {
   totalPrice:number=0.00;
   totalQuantity:number=0;
 
-  constructor(private formBuilder: FormBuilder,private cartService:CartService) { }
+  expirationMonths:number[]=[];
+  expirationYears:number[]=[];
+
+  constructor(private formBuilder: FormBuilder,private cartService:CartService, private expirationService: ExpirationService) { }
 
 
   getOrderDetails() {
@@ -28,12 +32,9 @@ export class CheckoutComponent implements OnInit {
 
     this.cartService.computeCartTotals();
   }
+
   ngOnInit(): void {
     this.getOrderDetails();
-    
-    console.log("Total price"+this.totalPrice);
-
-
     this.checkoutFormGroup = this.formBuilder.group({
       //group 1. key: customer
       customer: this.formBuilder.group({
@@ -66,6 +67,21 @@ export class CheckoutComponent implements OnInit {
         expirationYear: [''],
       })
     });
+
+    //populate credit card months and years
+    const startMonth:number=new Date().getMonth()+1;
+    this.expirationService.getMonths(startMonth).subscribe(
+      data => {
+        console.log(data);
+        this.expirationMonths=data
+      }
+    )
+    this.expirationService.getYears().subscribe(
+      data => {
+        console.log(data);
+        this.expirationYears=data
+      }
+    )
   }
 
   onSubmit() {
