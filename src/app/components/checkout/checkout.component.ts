@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
-import { ExpirationService } from 'src/app/services/expiration.service';
+import { FormService } from 'src/app/services/form.service';
+import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 
 @Component({
   selector: 'app-checkout',
@@ -10,13 +12,18 @@ import { ExpirationService } from 'src/app/services/expiration.service';
 })
 export class CheckoutComponent implements OnInit {
   checkoutFormGroup: FormGroup;
-  totalPrice:number=0.00;
-  totalQuantity:number=0;
+  totalPrice: number = 0.00;
+  totalQuantity: number = 0;
 
-  expirationMonths:number[]=[];
-  expirationYears:number[]=[];
+  countries: Country[] = [];
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
 
-  constructor(private formBuilder: FormBuilder,private cartService:CartService, private expirationService: ExpirationService) { }
+
+  expirationMonths: number[] = [];
+  expirationYears: number[] = [];
+
+  constructor(private formBuilder: FormBuilder, private cartService: CartService, private formService: FormService) { }
 
 
   getOrderDetails() {
@@ -69,17 +76,68 @@ export class CheckoutComponent implements OnInit {
     });
 
     //populate credit card months and years
-    const startMonth:number=new Date().getMonth()+1;
-    this.expirationService.getMonths(startMonth).subscribe(
+    const startMonth: number = new Date().getMonth() + 1;
+    this.formService.getMonths(startMonth).subscribe(
       data => {
         console.log(data);
-        this.expirationMonths=data
+        this.expirationMonths = data
       }
     )
-    this.expirationService.getYears().subscribe(
+    this.formService.getYears().subscribe(
       data => {
         console.log(data);
-        this.expirationYears=data
+        this.expirationYears = data
+      }
+    )
+
+    //populate countries and states
+    this.formService.getCountries().subscribe(
+      data => {
+        console.log(data);
+        this.countries = data
+      }
+    )
+  }
+
+  getStates(formGroupName: string) {
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+    const countryCode = formGroup.value.country.code; //???
+
+    //populate states by the country code using service 
+    this.formService.getStates(countryCode).subscribe(
+      data => {
+        if (formGroupName === 'shippingAddress') {
+          this.shippingAddressStates = data
+        } else {
+          this.billingAddressStates = data
+        }
+
+        //select first value as default
+        formGroup.get('state').setValue(data[0]);
+      }
+    )
+  }
+
+  handleMonthsOnYears() {
+    let startMonth: number;
+    const currentYear = new Date().getFullYear();
+    //let selectedYear = Number(this.checkoutFormGroup.controls.creditCard.value.expirationYear);
+    const selectedYear = Number(this.checkoutFormGroup.get('creditCard').value.expirationYear);
+
+
+    //if select current year, count from the current month
+    if (selectedYear === currentYear) {
+      startMonth = new Date().getMonth() + 1;
+    } else {
+      startMonth = 1;
+    }
+
+    //populate the month list based on the starting month
+    this.formService.getMonths(startMonth).subscribe(
+      data => {
+        // set the value of starting month for the field form
+        this.checkoutFormGroup.controls.creditCard.patchValue({ expirationMonth: startMonth });
+        this.expirationMonths = data
       }
     )
   }
@@ -96,12 +154,15 @@ export class CheckoutComponent implements OnInit {
 
   copyShippingToBillingAddress(event) {
     if (event.target.checked) {
-      console.log("Check box!");
       this.checkoutFormGroup.controls.billingAddress
         .setValue(this.checkoutFormGroup.controls.shippingAddress.value);
+
+        //bug fix for state copy
+        this.billingAddressStates=this.shippingAddressStates;
     } else {
       //clear form group
       this.checkoutFormGroup.controls.billingAddress.reset();
+      this.billingAddressStates=[];
     }
   }
 

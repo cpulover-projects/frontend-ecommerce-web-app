@@ -41,7 +41,7 @@ const routes: Routes = [
     ProductDetailComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
   ],
   imports: [ //import modules to expose their classes, interfaces... in the app module
     //configure Route

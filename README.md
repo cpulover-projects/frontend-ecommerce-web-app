@@ -166,6 +166,25 @@
 8. Define method for event handler in the Component 
 [[checkout.component.ts]()]
 
+### Drop-down list data population
+1. Create classes for data types 
+[[common/country]()] [[common/state]()]
+2. Add methods in Service to populate data 
+[[form.service.ts]()]
+   - Declare endpoints and inject HttpClient if need to invoke API to get data 
+3. Update Component to retrieve data from Service 
+[[checkout.component.ts]()]
+   - Declare attributes to match the retrieved data
+   - Subcribe to Service methods to match the data
+4. Update Template to populate drop-down list with the data 
+[[checkout.component.html]()] 
+**Dependency case:** when a data type is dependent on other selected type (e.g. list of states dependent on the selected country) 
+1. Add event-binding method for selection: ```(change)``` for ```<select>``` 
+[[checkout.component.html]()]
+2. Implement the event handler (method) for selection in the Component 
+[[checkout.component.ts]()]
+   - Read the selected data, retrieve list of dependent data
+3. Update Template to populate drop-down list with the dependent data 
 
 # Notes
 - @Injectable used for Service: allow the service to be injected into other classes/components.
@@ -187,7 +206,9 @@
 - [TypeScript] Use ```===``` for equality test
 - Use ```of``` operator to wrap object as Observable 
 [[ExpirationService]]
-
+- [TypeScript] Use ```Number(<variable>)``` to convert variable into number
+- [TypeScript] Use ```new Date()``` to get current day/month/year
+- For entity create Class, for list of entities create Component
 
 
 
