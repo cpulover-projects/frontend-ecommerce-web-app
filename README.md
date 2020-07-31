@@ -3,27 +3,25 @@
 ### Setup Project
 1. Create new project by Angular CLI
 2. Integrate Bootstrap
-3. Update 
-[app.component.html]()
-4. Test: run project by CLI
+3. Update main Template [app.component.html][]
+4. Test: run project by Angular CLI
 
 ### Main Process
-1. Generate new Class by CLI 
-[[common/product]()]
-   - Declare attributes to match with JSON received from REST API 
-2. Generate new Component by CLI (normally is a set of class entities) 
-[[components/product-list]()]
-3. Add new component selector to main template
-4. Generate new Service by CLI (provide functions calling API then map data to the Component)
-[[services/product-service]()]
-   - Inject HttpClient by constructor from ```@angular/common/http``` (supports HTTP methods)
-5. Import HttpClientModule from ```@angular/common/http``` and new Service (allow inject to other parts of the app) into 
-[app.module.ts]()
+1. Generate new Class
+[product.ts][]
+   - Declare attributes to match with JSON properties received from REST API 
+2. Generate new Component by CLI (normally to contain set of Class entities) 
+[components/product-list][]
+3. Add new component selector to the main Template [app.component.html][]
+4. Generate new Service by CLI (to provide functions calling API then map data to the Component)
+[product.service][]
+   - Inject HttpClient by constructor [from @angular/common/http] (to support HTTP methods)
+5. Import HttpClientModule [@angular/common/http] and new Service (to allow inject to other parts of the app) into [app.module.ts]()
 6. Update Component to subcribe data from the Service 
-[[product-list.component.ts]()]
+[product-list.component.ts][]
     - Inject the Service by constructor (to invoke methods of the Service)
 7. Update Template to display data 
-[[product-list-table.component.html]()]
+[product-list-table.component.html][]
 
 # 2.0 Release
 ### Template Integration
@@ -187,8 +185,8 @@
 3. Update Template to populate drop-down list with the dependent data 
 
 # Notes
-- @Injectable used for Service: allow the service to be injected into other classes/components.
-- ```ngOnInit()``` of Class is similar to @PostConstruct.
+- __*@Injectable*__ used for Service: allow the service to be injected into other Classes/Components.
+- ```ngOnInit()``` of Class is similar to __*@PostConstruct*__
 - Use prefix ```+``` to convert string to number
 - To view log, open Develop Tools/Inspect on the broswer (F12 for Chrome)
 - Use Safe Navigator operator ```?``` to guard against null or undefined values in property paths
@@ -202,14 +200,50 @@
 - Use ```Subject.next()``` to send events to the subscribers 
 [[cart-service.service.ts]()]
 - Use ```Array.find()/findIndex()``` to return the first element/id of element passing a given test, otherwise return undefined
-[[cart-service.service.ts]()]
-- [TypeScript] Use ```===``` for equality test
-- Use ```of``` operator to wrap object as Observable 
-[[ExpirationService]]
+[cart.service][]
+- [TypeScript] Use ```===``` for strict equality test (type and value)
+- Use ```of``` operator to wrap object as Observable [ExpirationService][]
 - [TypeScript] Use ```Number(<variable>)``` to convert variable into number
 - [TypeScript] Use ```new Date()``` to get current day/month/year
 - For entity create Class, for list of entities create Component
 
 
+[app.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/app.component.html
+[app.component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/app.component.ts
+[app.module.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/app.module.ts
 
+[cart-item.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/common/cart-item.ts
+[country.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/common/country.ts
+[product-categoryt.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/common/product-category.ts
+[product.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/common/product.ts
+[state.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/common/state.ts
+
+[components/cart-details]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/tree/master/src/app/components/cart-details 
+[components/cart-status]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/tree/master/src/app/components/cart-status
+[components/check-out]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/tree/master/src/app/components/check-out
+[components/product-category-menu]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/tree/master/src/app/components/product-category-menu
+[components/product-detail]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/tree/master/src/app/components/product-detail
+[components/product-list]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/tree/master/src/app/components/product-list
+[components/search]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/tree/master/src/app/components/search
+
+[cart-details.component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/cart-details/cart-details.component.ts
+[cart-details.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/cart-details/cart-details.component.html
+[cart-status.component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/cart-status/cart-status.component.ts
+[cart-status.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/cart-status/cart-status.component.html
+[checkout-component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/checkout/checkout.component.ts
+[checkout-component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/checkout/checkout.component.html
+[product-category-menu.component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/product-category-menu/product-category-menu.component.ts
+[product-category-menu.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/product-category-menu/product-category-menu.component.html
+[product-detail.component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/product-detail/product-detail.component.ts
+[product-detail.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/product-detail/product-detail.component.html
+[search.component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/search/search.component.ts
+[search.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/search/search.component.html
+[product-list.component.ts]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/product-list/product-list.component.ts
+[product-list.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/product-list/product-list.component.ts
+[product-list-grid.component.html]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/components/product-list/product-list-grid.component.ts
+
+
+[cart.service]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/services/cart.service.ts
+[form.service]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/services/form.service.ts
+[product.service]: https://github.com/cpulover-projects/frontend-ecommerce-web-app/blob/master/src/app/services/product.service.ts
 
